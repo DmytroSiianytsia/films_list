@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Accordion, Image, Item, Grid, Header, Embed} from 'semantic-ui-react';
+import {Button, Accordion, Image, Item, Grid, Header, Embed, Loader} from 'semantic-ui-react';
 
 export default class Films extends React.Component {
 
@@ -8,7 +8,7 @@ export default class Films extends React.Component {
   }
 
   render() {
-    const {films, showInfo, removeFilm, infoAboutFilm, searchFilms} = this.props;
+    const {films, showInfo, removeFilm, infoAboutFilm} = this.props;
     if (films) {
       return (
         films.map(film =>
@@ -79,7 +79,7 @@ export default class Films extends React.Component {
           </Accordion>
         ))
     } else {
-      return <div>Loading...</div>
+      return <Loader active inline='centered'>loading...</Loader>
     }
   }
 }

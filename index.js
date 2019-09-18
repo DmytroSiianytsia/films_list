@@ -6,7 +6,11 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const client = new Client({
-  connectionString: process.env.DATABASE_URL,
+  user: 'oabjftrqksdryb',
+  host: 'ec2-54-247-72-30.eu-west-1.compute.amazonaws.com',
+  database: 'deu11r03btu0a4',
+  password: 'd40fc02ca742b58cdba628fe644d09a79abe04fc6c85ffdf08c4f2b1cdc334be',
+  port: 5432,
   ssl: true
 });
 
@@ -33,7 +37,7 @@ app.post('/api', bodyParser.json(), (req, res) => {
     [title, release, genres, [actors], urlPoster, trailer, film_description],
     (err) => {
       if (err) {
-        console.log(err)
+        res.status(500)
       } else {
         res.status(200)
       }
@@ -42,7 +46,7 @@ app.post('/api', bodyParser.json(), (req, res) => {
 
 app.delete('/api/:idFilm', (req, res) => {
   client.query('DELETE  FROM movies  WHERE id = $1', [req.params.idFilm], () => {
-    res.send('ok')
+    res.status(200)
   });
 });
 

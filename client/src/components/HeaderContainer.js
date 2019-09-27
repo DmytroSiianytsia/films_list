@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import Header from "./Header";
-import {findFilm, loadFilms, sortFilms} from "../redux/actions";
+import {findFilm, loadFilms, sortByTitle, sortByYear} from "../redux/actions";
 
 function mapStateToProps(state) {
   return {}
@@ -8,7 +8,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    sortFilms: () => dispatch(sortFilms()),
+    sortByTitle: () => dispatch(sortByTitle()),
+    sortByYear: () => dispatch(sortByYear()),
     findFilm: (value) => dispatch(findFilm(value)),
     loadFilms: () => dispatch(loadFilms())
   }

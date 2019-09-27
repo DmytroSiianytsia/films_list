@@ -6,11 +6,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const client = new Client({
-  user: 'oabjftrqksdryb',
-  host: 'ec2-54-247-72-30.eu-west-1.compute.amazonaws.com',
-  database: 'deu11r03btu0a4',
-  password: 'd40fc02ca742b58cdba628fe644d09a79abe04fc6c85ffdf08c4f2b1cdc334be',
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
   ssl: true
 });
 
@@ -24,8 +20,8 @@ app.use((req, res, next) => {
 client.connect();
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.get('/api', (req, res) => {
-  client.query('SELECT * FROM movies', (err, result) => {
+app.get('/id', (req, res) => {
+  client.query('SELECT * FROM movies ORDER BY id', (err, result) => {
     res.send(result.rows);
   });
 });

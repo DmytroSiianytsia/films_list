@@ -1,7 +1,20 @@
 import {
   ADD_DESCRIPTION,
-  ADD_GENRES, ADD_POSTER, ADD_RELEASE_YEAR, ADD_STARS, ADD_TITLE, ADD_TRAILER, CLEAR_INPUT,
-  FIND_FILM, REMOVE_FILM, SHOW_FILMS, SHOW_INFO_ABOUT_FILM, SORT_FILMS
+  ADD_GENRES,
+  ADD_POSTER,
+  ADD_RELEASE_YEAR,
+  ADD_STARS,
+  ADD_TITLE,
+  ADD_TRAILER,
+  CLEAR_INPUT,
+  FIND_FILM, findFilm,
+  loadFilms,
+  REMOVE_FILM,
+  SHOW_FILMS,
+  SHOW_INFO_ABOUT_FILM,
+  SORT_FILMS_BY_TITLE,
+  SORT_FILMS_BY_YEAR,
+  UPDATE_SEARCH_INPUT
 } from "./actions";
 import {initialState} from "../components/initialState";
 
@@ -110,19 +123,31 @@ export default function reducer(state = initialState, action) {
         };
       }
 
-    case SORT_FILMS:
-      const sortedFilms = state.films.filter(film => film).sort((film1, film2) =>
+    case SORT_FILMS_BY_TITLE:
+      const sortedFilmsByTitle = [...state.films].sort((film1, film2) =>
         (film1.title.toLowerCase() > film2.title.toLowerCase())
           ? 1 : ((film2.title.toLowerCase() > film1.title.toLowerCase())
           ? -1 : 0));
       return {
         ...state,
-        films: sortedFilms
+        films: sortedFilmsByTitle
+      };
+
+    case SORT_FILMS_BY_YEAR:
+      const sortedFilmsByYear = [...state.films].sort((film1, film2) =>
+
+        (film1.release > film2.release)
+          ? 1 : ((film2.release > film1.release)
+          ? -1 : 0));
+      return {
+        ...state,
+        films: sortedFilmsByYear
       };
 
     case FIND_FILM:
       const {value} = action;
-      const searchFilms = state.films.filter(({title, actors}) =>
+      const n = state.films;
+      const searchFilms = n.filter(({title, actors}) =>
         title.toLowerCase().includes(value.toLowerCase())
         || actors.join('').toLowerCase().includes(value.toLowerCase()));
       return {

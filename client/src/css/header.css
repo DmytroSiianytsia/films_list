@@ -1,0 +1,40 @@
+.header__container {
+  position: relative;
+}
+
+.header {
+  position: fixed;
+  user-select: none;
+  display: flex;
+  z-index: 5;
+  background: #003;
+  width: 100%;
+  top: 0;
+  padding: 15px 0;
+}
+
+.header__sort {
+  margin: 0 20px;
+  color: #fff;
+}
+
+.header__sort:hover,
+.header__sort-list:hover {
+  cursor: pointer;
+}
+
+.header__search {
+  margin: 0 20px 0 auto;
+}
+
+.header__sort-list {
+  color: #ccc;
+  position: absolute;
+  left: -120px;
+  list-style-type: none;
+  transition: .5s;
+}
+
+.show {
+  left: -20px;
+}

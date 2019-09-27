@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Accordion, Image, Item, Grid, Header, Embed, Loader} from 'semantic-ui-react';
+import '../css/films.css';
 
 export default class Films extends React.Component {
 
@@ -11,75 +11,69 @@ export default class Films extends React.Component {
     const {films, showInfo, removeFilm, infoAboutFilm} = this.props;
     if (films) {
       return (
-        films.map(film =>
-          <Accordion fluid styled key={film.id}>
-            <Accordion.Title onClick={() => showInfo(film.id)}>
-              <Item key={film.id}>
-                <Header as='h3' textAlign='center'>
+        films.map(film => {
+          return (
+            <div className='wrapper' key={film.id}>
+              <div className='film'>
+                <h3 className='film__title' onClick={() => showInfo(film.id)}>
                   {film.title}
-                  {(film.id > 12)
-                    ? <Button
-                      content='Remove film'
-                      floated='right'
-                      color='black'
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        removeFilm(film.id)
-                      }}
-                    />
-                    : ''
-                  }
-                </Header>
-                <Item.Content>
-                  <Grid celled>
-                    <Grid.Row>
-                      <Grid.Column width={2}>
-                        {film.img ? <Image src={film.img} size='large'/> : ''}
-                      </Grid.Column>
-                      <Grid.Column width={4}>
-                        <Item.Header as='a'>Release:</Item.Header>
-                        <Item.Meta>{film.release}</Item.Meta>
-                        <Item.Header as='a'>Genres:</Item.Header>
-                        <Item.Meta>{film.genres}</Item.Meta>
-                        <Item.Header as='a'>Stars:</Item.Header>
-                        <Item.Meta>{(film.actors && typeof film.actors == 'object')
-                          ? film.actors.join(', ')
-                          : film.actors}</Item.Meta>
-                      </Grid.Column>
-                    </Grid.Row>
-                  </Grid>
-                </Item.Content>
-              </Item>
-            </Accordion.Title>
-            <Accordion.Content active={infoAboutFilm === film.id}>
-              <Grid divided>
-                <Grid.Row color='black' inverted centered>
-                  <Grid.Column width={4}>
-                    {film.trailer
-                      ? <Embed
-                        id={film.trailer}
-                        placeholder={film.img}
-                        source='youtube'
-                        iframe={{
-                          allowFullScreen: true,
-                          style: {
-                            padding: 10,
-                          },
-                        }}
-                      />
+                </h3>
+                <div className='container'>
+                  <div className='film__body'>
+                    <div className='film__poster'>
+                      <img className='poster' src={film.img} alt={film.title}/>
+                    </div>
+                    <div className='film__short-info'>
+                      <div>
+                        <h4>Год:</h4>{film.release}
+                      </div>
+                      <div>
+                        <h4>Жанр:</h4>{film.genres}
+                      </div>
+                      <div>
+                        <h4>Актеры:</h4>{(film.actors && typeof film.actors == 'object')
+                        ? film.actors.join(', ')
+                        : film.actors}
+                      </div>
+                    </div>
+                    {(film.id > 12)
+                      ? <div className='film__remove'
+                             onClick={(e) => {
+                               e.stopPropagation();
+                               removeFilm(film.id)
+                             }}>
+                        Удалить
+                      </div>
                       : ''
                     }
-                  </Grid.Column>
-                  <Grid.Column width={6}>
-                    {film.film_description}
-                  </Grid.Column>
-                </Grid.Row>
-              </Grid>
-            </Accordion.Content>
-          </Accordion>
-        ))
+                  </div>
+                  {infoAboutFilm === film.id
+                    ?
+                    <div className='film__more-info'>
+                      <div className='film__trailer'>
+                        {film.trailer
+                          ? <iframe className='film__iframe'
+                                    width="320"
+                                    height="240"
+                                    src={`https://www.youtube.com/embed/${film.trailer}`}
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen/>
+                          : ''}
+                      </div>
+                      <div className='film__description'>
+                        {film.film_description}
+                      </div>
+                    </div>
+                    : ''}
+                </div>
+              </div>
+            </div>
+          )
+        })
+      )
     } else {
-      return <Loader active inline='centered'>loading...</Loader>
+      return <div>loading</div>
     }
   }
 }

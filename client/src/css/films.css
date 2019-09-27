@@ -1,0 +1,80 @@
+body {
+  background: #000;
+}
+
+.wrapper {
+  position: relative;
+  width: 80%;
+  margin: 20px auto;
+  user-select: none;
+  box-sizing: border-box;
+  background: #fff;
+  top: 50px;
+  border-radius: 0.25rem;
+}
+
+.container {
+  position: relative;
+}
+
+.film {
+
+}
+
+.film__title {
+  text-align: center;
+  padding-top: 15px;
+  transition: .3s;
+}
+
+.film__title:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.film__body {
+  display: flex;
+  margin: 0 auto;
+}
+
+.film__poster {
+  min-width: 300px;
+  min-height: 200px;
+}
+
+.poster {
+  margin-left: 15px;
+  margin-bottom: 15px;
+  width: 300px;
+  height: 200px;
+}
+
+.film__short-info {
+  margin-left: 30px;
+}
+
+.film__remove {
+  margin: -30px 20px 0 auto;
+  background: #000;
+  color: #fff;
+  height: 24px;
+  padding: 3px;
+  border-radius: 0.25em;
+
+}
+
+.film__more-info {
+  display: flex;
+  margin: 0 auto;
+  background-color: #000;
+  color: #fff;
+  width: 100%;
+}
+
+.film__trailer {
+  margin-left: 10%;
+}
+
+.film__description {
+  margin: 25px 10% 0 30px;
+}

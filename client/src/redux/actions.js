@@ -5,7 +5,8 @@ export const ADD_GENRES = 'add_format';
 export const ADD_STARS = 'add_stars';
 export const REMOVE_FILM = 'remove_film';
 export const SHOW_INFO_ABOUT_FILM = 'show_info_about_film';
-export const SORT_FILMS = 'sort_films';
+export const SORT_FILMS_BY_TITLE = 'sort_films_by_title';
+export const SORT_FILMS_BY_YEAR = 'sort_films_by_year';
 export const FIND_FILM = 'find_film';
 export const CLEAR_INPUT = 'clear_input';
 export const ADD_POSTER = 'add_poster';
@@ -32,7 +33,7 @@ function clearInput() {
 
 export function loadFilms() {
   return dispatch => {
-    fetch('/api')
+    fetch('/id')
       .then(res => res.json())
       .then(data => {
         if (data.error) {
@@ -118,9 +119,15 @@ export function showInfo(idFilm) {
   }
 }
 
-export function sortFilms() {
+export function sortByTitle() {
   return {
-    type: SORT_FILMS,
+    type: SORT_FILMS_BY_TITLE,
+  }
+}
+
+export function sortByYear() {
+  return {
+    type: SORT_FILMS_BY_YEAR,
   }
 }
 

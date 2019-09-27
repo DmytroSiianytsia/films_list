@@ -1,5 +1,4 @@
 import {connect} from 'react-redux';
-import Modal from "./ModalAddFilm";
 import {
   addDescription,
   addGenres,
@@ -10,6 +9,7 @@ import {
   addTrailer,
   postFilm
 } from "../redux/actions";
+import AddFilmModal from "./AddFilmModal";
 
 function mapStateToProps(state) {
   return {
@@ -30,5 +30,5 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const ModalAddFilmContainer = connect(mapStateToProps, mapDispatchToProps)(Modal);
+const ModalAddFilmContainer = connect(mapStateToProps, mapDispatchToProps)(AddFilmModal);
 export default ModalAddFilmContainer;
